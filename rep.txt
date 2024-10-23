@@ -1,0 +1,73 @@
+#include <iostream>
+using namespace std;
+
+class Product {
+private:    
+    string productId;      
+    string productName;    
+    double Price;          
+    int stockQuantity;     
+
+public: 
+    Product(string id, string name, double price, int quantity) {
+        productId = id;
+        productName = name;
+        setPrice(price);            
+        setStockQuantity(quantity); 
+    }
+
+    void setPrice(double price) {
+        if (price > 0) {
+            this->Price = price;  
+        } else {
+            cout << "Price must be positive. Keeping the existing price: " << Price << endl;
+        }
+    }
+
+    void setStockQuantity(int quantity) {
+        if (quantity >= 0) {
+            stockQuantity = quantity;
+        } else {
+            cout << "Stock quantity cannot be negative. Keeping the existing quantity: " << stockQuantity << endl;
+        }
+    }
+
+    void applyDiscount(int size, double discArray[]) {
+        for (int i = 0; i < size; i++) {
+            double discountAmount = (Price * discArray[i]) / 100;
+            Price = Price - discountAmount;
+
+            if (Price < 0) {
+                Price = 0;
+            }
+        }
+    }
+
+    double getPrice() {
+        return Price;
+    }
+
+    int getStockQuantity() {
+        return stockQuantity;
+    }
+
+    void printInfo() {
+        cout << "Product ID: " << productId << endl;
+        cout << "Product Name: " << productName << endl;
+        cout << "Price: " << Price << endl;
+        cout << "Stock Quantity: " << stockQuantity << endl;
+    }
+};
+
+int main() {
+    Product product("0123", "Phone", 300, 20);
+    product.printInfo();
+
+    double discountArray[] = {10, 20, 30};
+    product.applyDiscount(3, discountArray);
+    
+    cout << "Applying discounts:" << endl << endl;
+    product.printInfo();
+
+    return 0;
+}
