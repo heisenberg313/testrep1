@@ -66,7 +66,7 @@ int main() {
     double discountArray[] = {10, 20, 30};
     product.applyDiscount(3, discountArray);
     
-    cout << "Applying discounts:" << endl << endl;
+    cout << "THIS IS A TEST CHANGE" << endl << endl;
     product.printInfo();
 
     return 0;
